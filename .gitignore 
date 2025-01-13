@@ -1,9 +1,0 @@
-
-build/
-*.so
-*.log
-.vscode
-src/.vscode
-src/log
-install
-log
