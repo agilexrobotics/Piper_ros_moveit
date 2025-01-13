@@ -1,15 +1,10 @@
-# C extensions
-*.so
 
 build/
-
-# Django stuff:
+*.so
 *.log
-
 .vscode
 src/.vscode
 src/log
-build
 install
 log
 src/piper/piper_moveit_config/.setup_assistant
