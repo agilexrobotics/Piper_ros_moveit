@@ -7,4 +7,3 @@ src/.vscode
 src/log
 install
 log
-src/piper/piper_moveit_config/.setup_assistant
