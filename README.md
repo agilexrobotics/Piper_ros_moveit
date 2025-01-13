@@ -40,7 +40,7 @@ ros2 launch piper_description display_piper.launch.py
 2）使用moveit2，控制机械臂
 
 ```
-ros2 launch piper_moveit_config_v4 demo.launch.py
+ros2 launch piper_moveit_config demo.launch.py
 ```
 
 ![](image/piper_moveit.png)
