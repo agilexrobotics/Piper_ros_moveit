@@ -116,22 +116,23 @@ ros2 launch piper_moveit_config demo.launch.py
     根据报错安装对应缺少的包即可，如果使用的是conda注意环境路径问题
 
 ### 5.2、打开gazebo时报错，提示urdf未加载，导致仿真环境中机械臂末端与底座穿模
-    1、注意编译后的install下piper_description中是否有config，且config中是否包含src/piper/piper_description中config的文件
-    install中缺少urdf同理
+1、注意编译后的install下piper_description中是否有config，且config中是否包含src/piper/piper_description中config的文件
 
-    2、注意src/piper/piper_description/urdf/piper_description_gazebo.xacro中644行的路径是否正确，如确认后问题依然存在，将路径改为绝对路径
+install中缺少urdf同理
+
+2、注意src/piper/piper_description/urdf/piper_description_gazebo.xacro中644行的路径是否正确，如确认后问题依然存在，将路径改为绝对路径
 
 ### 5.3、运行demo.launch.py时报错
 
-    报错：参数需要一个double，而提供的是一个string
-    解决办法：
-    终端运行
+报错：参数需要一个double，而提供的是一个string
+解决办法：
+终端运行
 ```
 echo "export LC_NUMERIC=en_US.UTF-8" >> ~/.bashrc
 source ~/.bashrc
 ```
-    或在运行launch前加上LC_NUMERIC=en_US.UTF-8
-    例如
+或在运行launch前加上LC_NUMERIC=en_US.UTF-8
+例如
 ```
 LC_NUMERIC=en_US.UTF-8 ros2 launch piper_moveit_config demo.launch.py
 ```
