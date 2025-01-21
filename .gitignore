@@ -1,0 +1,13 @@
+.catkin_workspace
+devel
+build
+.vscode
+.idea
+.catkin_workspace
+*.log
+*.7z
+*.zip
+*.tar
+analytical_solution
+oculus_reader
+__pycache__
