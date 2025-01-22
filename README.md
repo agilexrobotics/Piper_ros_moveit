@@ -1,4 +1,10 @@
 # Piper_Moveit2
+![ubuntu](https://img.shields.io/badge/Ubuntu-22.04-orange.svg)
+
+
+|PYTHON |STATE|
+|---|---|
+|![humble](https://img.shields.io/badge/ros-humble-blue.svg)|![Pass](https://img.shields.io/badge/Pass-blue.svg)|
 
 > 注：安装使用过程中出现问题可查看第5部分
 
@@ -108,6 +114,62 @@ ros2 launch piper_moveit_config demo.launch.py
 调整好位置后点击左侧MotionPlanning中Planning的Plan&Execute即可开始规划
 
 这时可以看到gazebo中的模型已经开始移动
+
+### 4.3、moveit2控制真实机械臂piper
+
+1）配置piper_ros
+
+配置环境
+
+```
+pip3 install python-can scipy piper_sdk catkin-pkg em
+sudo apt install ros-$ROS_DISTRO-ros2-control
+sudo apt install ros-$ROS_DISTRO-ros2-controllers
+sudo apt install ros-$ROS_DISTRO-controller-manager
+```
+
+源码编译
+
+```
+git clone https://github.com/agilexrobotics/Piper_ros.git -b ros-humble-no-aloha
+cd ~/Piper_ros
+colcon build 
+```
+2）控制机械臂
+
+安装依赖
+```
+sudo apt update && sudo apt install ethtool
+sudo apt install can-utils
+```
+激活端口
+```
+cd ~/Piper_ros
+source install/setup.bash
+bash can_activate.sh can0 1000000
+```
+开启控制节点
+
+```
+ros2 launch piper start_single_piper.launch.py
+```
+
+开启moveit2
+
+```
+cd ~/Piper_ros_moveit
+conda deactivate # 若无conda环境可去除此行
+source install/setup.bash
+ros2 launch piper_moveit_config demo.launch.py
+```
+
+![](src/image/piper_moveit.png)
+
+
+可以直接拖动机械臂末端的箭头控制机械臂
+
+调整好位置后点击左侧MotionPlanning中Planning的Plan&Execute即可开始规划并运动
+
 
 ## 5、可能遇见的问题
 

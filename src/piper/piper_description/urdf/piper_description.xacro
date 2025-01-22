@@ -514,7 +514,7 @@
       effort="10"
       velocity="1" />
   </joint>
-
+  
 <!-- 
     <ros2_control name="GazeboSystem" type="system">
         <hardware>
