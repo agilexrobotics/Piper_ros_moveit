@@ -1,3 +1,5 @@
+fake_interpolating_controller_rate: 100
+
 controller_list:
   - name: fake_piper_controller
     type: $(arg fake_execution_type)

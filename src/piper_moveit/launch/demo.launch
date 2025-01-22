@@ -22,6 +22,7 @@
   <!-- By default, hide joint_state_publisher's GUI in 'fake' controller_manager mode -->
   <arg name="use_gui" default="false" />
   <arg name="use_rviz" default="true" />
+  
 
   <!-- If needed, broadcast static tf for robot root -->
 
@@ -30,11 +31,13 @@
          MoveIt's fake controller's joint states are considered via the 'source_list' parameter -->
     <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" unless="$(arg use_gui)">
       <rosparam param="source_list">[move_group/fake_controller_joint_states]</rosparam>
+      <param name="rate" value="100" />
     </node>
     <!-- If desired, a GUI version is available allowing to move the simulated robot around manually
          This corresponds to moving around the real robot without the use of MoveIt. -->
     <node name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" if="$(arg use_gui)">
       <rosparam param="source_list">[move_group/fake_controller_joint_states]</rosparam>
+      <param name="rate" value="100" />
     </node>
 
     <!-- Given the published joint states, publish tf for the robot links -->
