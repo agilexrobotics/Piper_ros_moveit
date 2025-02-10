@@ -3,6 +3,9 @@
 moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControllerManager
 
 moveit_simple_controller_manager:
+
+  update_rate: 200
+
   controller_names:
     - arm_controller
     - gripper_controller
