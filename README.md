@@ -81,9 +81,9 @@ roslaunch piper start_single_piper.launch
 cd ~/Piper_ros_moveit
 source devel/setup.bash
 ```
-运行
+运行(有夹爪)
 ```
-roslaunch piper_moveit demo.launch
+roslaunch piper_with_gripper_moveit demo.launch
 ```
 3）规划轨迹并运动
 
