@@ -75,9 +75,9 @@ Navigate to the workspace
 cd ~/Piper_ros_moveit
 source devel/setup.bash
 ```
-Run
+Run(with gripper)
 ```
-roslaunch piper_moveit demo.launch
+roslaunch piper_with_gripper_moveit demo.launch
 ```
 3) Plan the trajectory and move
 
