@@ -3,7 +3,7 @@
   <arg name="rviz_config" default="$(find piper_description)/rviz/piper_no_gripper.rviz" />
   <param
     name="robot_description"
-    textfile="$(find piper_description)/urdf/moveit/piper_no_gripper_description.urdf" />
+    textfile="$(find piper_description)/urdf/piper_no_gripper_description.urdf" />
   <node
     name="joint_state_publisher_gui"
     pkg="joint_state_publisher_gui"

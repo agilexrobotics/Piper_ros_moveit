@@ -90,10 +90,7 @@
     <param name="default_planning_pipeline" value="$(arg pipeline)" />
     <param name="capabilities" value="$(arg capabilities)" />
     <param name="disable_capabilities" value="$(arg disable_capabilities)" />
-    <!-- Trajectory Execution Configuration -->
-    <param name="trajectory_execution/allowed_execution_duration_scaling" value="1.6"/>
-    <param name="trajectory_execution/allowed_goal_duration_margin" value="1"/>
-    <param name="trajectory_execution/allowed_start_tolerance" value="0.01"/>
+
     <!-- do not copy dynamics information from /joint_states to internal robot monitoring
          default to false, because almost nothing in move_group relies on this information -->
     <param name="monitor_dynamics" value="false" />

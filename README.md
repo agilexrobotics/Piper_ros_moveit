@@ -62,6 +62,8 @@ catkin_make
 
 1）使用Piper_ros打开机械臂控制节点
 
+>注：每次重启moveit/demo.launch后需要重启ros控制节点，节点可在运行moveit后启动
+
 进入工作空间
 
 ```
@@ -85,6 +87,22 @@ source devel/setup.bash
 ```
 roslaunch piper_with_gripper_moveit demo.launch
 ```
+>夹爪模式分为两个控制组：
+>- **机械臂控制组**（包含关节 joint1 至 joint6）
+>- **夹爪控制组**（包含关节 joint7 和 joint8）夹爪控制组采用 joint7 进行主动控制，而 joint8 为被动控制
+
+运行(有无夹爪)
+```
+roslaunch piper_no_gripper_moveit demo.launch
+```
+控制信息节点为/joint_states
+```
+rostopic echo /joint_states
+```
+>- 其中前6个值为机械臂位置控制
+>- 第7个值为夹爪位置控制
+>- 第8个值为0不参与控制
+
 3）规划轨迹并运动
 
 ![](src/image/piper_moveit.png)

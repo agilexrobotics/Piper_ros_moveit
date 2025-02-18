@@ -6,7 +6,7 @@
   <arg name="robot_description" default="robot_description"/>
 
   <!-- Load universal robot description format (URDF) -->
-  <param if="$(arg load_robot_description)" name="$(arg robot_description)" textfile="$(find piper_description)/urdf/moveit/piper_no_gripper_description.urdf"/>
+  <param if="$(arg load_robot_description)" name="$(arg robot_description)" textfile="$(find piper_description)/urdf/piper_no_gripper_description.urdf"/>
 
   <!-- The semantic description that corresponds to the URDF -->
   <param name="$(arg robot_description)_semantic" textfile="$(find piper_no_gripper_moveit)/config/piper_description.srdf" />

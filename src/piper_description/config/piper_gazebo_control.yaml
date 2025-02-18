@@ -35,3 +35,37 @@ piper_description:
     type: position_controllers/JointPositionController
     joint: joint8
     pid: {p: 100, i: 0.001, d: 10.0}
+  # gazebo_ros_control:
+  #   pid_gains:
+  #     joint1:
+  #       p: 0
+  #       i: 0
+  #       d: 0
+  #     joint2:
+  #       p: 0
+  #       i: 0
+  #       d: 0
+  #     joint3:
+  #       p: 0
+  #       i: 0
+  #       d: 0
+  #     joint4:
+  #       p: 0
+  #       i: 0
+  #       d: 0
+  #     joint5:
+  #       p: 0
+  #       i: 0
+  #       d: 0
+  #     joint6:
+  #       p: 0
+  #       i: 0
+  #       d: 0
+  #     joint7:
+  #       p: 0
+  #       i: 0.001
+  #       d: 0
+  #     joint8:
+  #       p: 0
+  #       i: 0.001
+  #       d: 0

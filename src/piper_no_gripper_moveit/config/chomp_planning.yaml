@@ -1,7 +1,7 @@
 planning_time_limit: 10.0
 max_iterations: 200
-max_iterations_after_collision_free: 100
-smoothness_cost_weight: 0.5
+max_iterations_after_collision_free: 5
+smoothness_cost_weight: 0.1
 obstacle_cost_weight: 1.0
 learning_rate: 0.01
 smoothness_cost_velocity: 0.0

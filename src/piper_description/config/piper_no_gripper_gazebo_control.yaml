@@ -23,3 +23,7 @@ piper_description:
     type: position_controllers/JointPositionController
     joint: joint5
     pid: {p: 100.0, i: 0.01, d: 5.0}
+  joint6_position_controller:
+    type: position_controllers/JointPositionController
+    joint: joint6
+    pid: {p: 100.0, i: 0.01, d: 5.0}

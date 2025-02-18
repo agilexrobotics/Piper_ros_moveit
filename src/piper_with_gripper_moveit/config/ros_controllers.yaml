@@ -1,4 +1,4 @@
-piper_controller:
+arm_controllers:
   type: position_controllers/JointTrajectoryController
   joints:
     - joint1
