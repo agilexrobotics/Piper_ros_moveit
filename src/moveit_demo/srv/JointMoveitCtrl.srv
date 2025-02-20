@@ -1,0 +1,8 @@
+# JointMoveitCtrl.srv
+float64[6] joint_states  # 这是一个包含多个关节位置的列表
+float64 gripper
+float64 max_velocity
+float64 max_acceleration
+---
+int64 error_code
+bool status

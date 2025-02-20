@@ -65,4 +65,7 @@
     <arg name="moveit_warehouse_database_path" value="$(arg db_path)"/>
   </include>
 
+    <!-- 启动 joint_moveit_ctrl_server -->
+  <node name="joint_moveit_ctrl_server" pkg="moveit_demo" type="joint_moveit_ctrl_server.py"
+        output="screen" launch-prefix="python3"/>
 </launch>
