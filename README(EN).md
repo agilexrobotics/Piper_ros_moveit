@@ -81,10 +81,10 @@ cd Piper_ros
 source devel/setup.bash
 ```
 
-Run the control node:  
+Run the node (gripper control value doubled):
 
 ```bash
-roslaunch piper start_single_piper.launch
+roslaunch piper start_single_piper.launch gripper_val_mutiple:=2
 ```
 
 > The system is successfully enabled when confirmation appears.  
