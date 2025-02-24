@@ -4,18 +4,17 @@
 
 ![ubuntu](https://img.shields.io/badge/Ubuntu-22.04-orange.svg)
 
-
 |PYTHON |STATE|
 |---|---|
 |![humble](https://img.shields.io/badge/ros-humble-blue.svg)|![Pass](https://img.shields.io/badge/Pass-blue.svg)|
 
 > 注：安装使用过程中出现问题可查看第5部分
 
-## 1、安装Moveit2 
+## 1、安装Moveit2
 
 1）二进制安装，[参考链接](https://moveit.ai/install-moveit2/binary/)
 
-```
+```bash
 sudo apt install ros-humble-moveit*
 ```
 
@@ -25,81 +24,49 @@ sudo apt install ros-humble-moveit*
 
 安装完Moveit2之后，需要安装一些依赖
 
-```
+```bash
 sudo apt-get install ros-humble-control* ros-humble-joint-trajectory-controller ros-humble-joint-state-* ros-humble-gripper-controllers ros-humble-trajectory-msgs
 ```
+
 若系统语言区域设置不为英文区域，须设置
 
-```
+```bash
 echo "export LC_NUMERIC=en_US.UTF-8" >> ~/.bashrc
 source ~/.bashrc
 ```
+
 ## 3、工作空间编译
+
 git源码，打开终端
-```
+
+```bash
 git clone https://github.com/agilexrobotics/Piper_ros_moveit.git
 ```
 
 进入工作空间
 
-```
+```bash
 cd Piper_ros_moveit
 ```
+
 编译
-```
+
+```bash
 colcon build
 ```
-## 4、使用方法
-> 注：在新终端运行launch是都需source一次
 
-进入工作空间
-```
-cd ~/Piper_ros_moveit
-```
-source
-```
-source install/setup.bash
-```
-### 4.1、moveit rviz仿真
-1）查看piper机械臂模型
+## 4、moveit控制
 
-```
-ros2 launch piper_description display_piper.launch.py 
-```
+### 4.1、moveit控制Gazebo仿真机械臂
 
-成功打开之后，需要在Rviz中添加模型，若显示窗口已有机械臂则无需再添加
-
-在左下角display的add中添加RobotModel，并将Description Topic设置为/robot_description
-
-如下图左侧设置
-
-![](src/image/piper.png)
-
-可以直接通过弹出的控制窗口控制机械臂关节
-
-
-2）使用moveit2，控制机械臂
-
-(可以独立上一部单独使用，运行后直接添加模型即可，若显示窗口已有机械臂则无需再添加)
-
-```
-ros2 launch piper_moveit_config demo.launch.py
-```
-
-![](src/image/piper_moveit.png)
-
-可以直接拖动机械臂末端的箭头控制机械臂
-
-调整好位置后点击左侧MotionPlanning中Planning的Plan&Execute或Plan即可开始规划
-
-### 4.2、启动Gazebo仿真
 > 注：需要关闭4.1中打开的进程后使用，不能同时开启
 
 1）启动Gazebo仿真
 
-```
+```bash
 ros2 launch piper_description piper_gazebo.launch.py
 ```
+
 按照4.1操作添加模型，若显示窗口已有机械臂则无需再添加
 
 ![](src/image/piper_gazebo.png)
@@ -108,7 +75,7 @@ ros2 launch piper_description piper_gazebo.launch.py
 
 > 注：有时候会出现moveit控制不了gazebo模型的情况，需要重新启动
 
-```
+```bash
 ros2 launch piper_moveit_config demo.launch.py
 ```
 
@@ -118,13 +85,13 @@ ros2 launch piper_moveit_config demo.launch.py
 
 这时可以看到gazebo中的模型已经开始移动
 
-### 4.3、moveit2控制真实机械臂piper
+### 4.3、moveit控制真实机械臂
 
 1）配置piper_ros
 
 配置环境
 
-```
+```bash
 pip3 install python-can scipy piper_sdk catkin-pkg em
 sudo apt install ros-$ROS_DISTRO-ros2-control
 sudo apt install ros-$ROS_DISTRO-ros2-controllers
@@ -133,54 +100,65 @@ sudo apt install ros-$ROS_DISTRO-controller-manager
 
 源码编译
 
-```
+```bash
 git clone https://github.com/agilexrobotics/Piper_ros.git -b ros-humble-no-aloha
 cd ~/Piper_ros
 colcon build 
 ```
+
 2）控制机械臂
 
 安装依赖
-```
+
+```bash
 sudo apt update && sudo apt install ethtool
 sudo apt install can-utils
 ```
+
 激活端口
-```
+
+```bash
 cd ~/Piper_ros
 source install/setup.bash
 bash can_activate.sh can0 1000000
 ```
+
 开启控制节点
 
-```
+```bash
 ros2 launch piper start_single_piper.launch.py
 ```
 
 开启moveit2
 
-```
+```bash
 cd ~/Piper_ros_moveit
 conda deactivate # 若无conda环境可去除此行
 source install/setup.bash
-ros2 launch piper_moveit_config demo.launch.py
+```
+
+无夹爪运行
+
+```bash
+ros2 launch piper_no_gripper_moveit demo.launch.py
+```
+
+有夹爪运行
+
+```bash
+ros2 launch piper_with_gripper_moveit demo.launch.py
 ```
 
 ![](src/image/piper_moveit.png)
-
 
 可以直接拖动机械臂末端的箭头控制机械臂
 
 调整好位置后点击左侧MotionPlanning中Planning的Plan&Execute即可开始规划并运动
 
-
 ## 5、可能遇见的问题
 
-### 5.1、编译报错
+### 5.1、打开gazebo时报错，提示urdf未加载，导致仿真环境中机械臂末端与底座穿模
 
-    根据报错安装对应缺少的包即可，如果使用的是conda注意环境路径问题
-
-### 5.2、打开gazebo时报错，提示urdf未加载，导致仿真环境中机械臂末端与底座穿模
 1、注意编译后的install下piper_description中是否有config，且config中是否包含src/piper/piper_description中config的文件
 
 install中缺少urdf同理
@@ -192,12 +170,15 @@ install中缺少urdf同理
 报错：参数需要一个double，而提供的是一个string
 解决办法：
 终端运行
-```
+
+```bash
 echo "export LC_NUMERIC=en_US.UTF-8" >> ~/.bashrc
 source ~/.bashrc
 ```
+
 或在运行launch前加上LC_NUMERIC=en_US.UTF-8
 例如
-```
+
+```bash
 LC_NUMERIC=en_US.UTF-8 ros2 launch piper_moveit_config demo.launch.py
 ```

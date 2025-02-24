@@ -1,210 +1,184 @@
 # Piper_Moveit2
 
-[中文](README.md)
+[中文](README(CN).md)
 
 ![ubuntu](https://img.shields.io/badge/Ubuntu-22.04-orange.svg)
-
 
 |PYTHON |STATE|
 |---|---|
 |![humble](https://img.shields.io/badge/ros-humble-blue.svg)|![Pass](https://img.shields.io/badge/Pass-blue.svg)|
 
-> Note: If issues occur during installation or usage, refer to Section 5.
+> Note: If you encounter issues during installation and usage, refer to Section 5.
 
 ## 1. Install Moveit2
 
-1) Binary installation, [reference link](https://moveit.ai/install-moveit2/binary/)
+(1) Binary Installation, [Reference Link](https://moveit.ai/install-moveit2/binary/)
 
-```
+```bash
 sudo apt install ros-humble-moveit*
 ```
 
-2) Source compilation method, [reference link](https://moveit.ai/install-moveit2/source/)
-
+(2) Source Compilation Method, [Reference Link](https://moveit.ai/install-moveit2/source/)
 
 ## 2. Environment Setup
 
-After installing Moveit2, you need to install some dependencies
+After installing Moveit2, some dependencies need to be installed:
 
-```
+```bash
 sudo apt-get install ros-humble-control* ros-humble-joint-trajectory-controller ros-humble-joint-state-* ros-humble-gripper-controllers ros-humble-trajectory-msgs
 ```
-If your system locale is not set to an English region, set it to:
 
-```
+If your system's language region setting is not English, you need to set it:
+
+```bash
 echo "export LC_NUMERIC=en_US.UTF-8" >> ~/.bashrc
 source ~/.bashrc
 ```
+
 ## 3. Workspace Compilation
-Clone the source code, open a terminal
-```
+
+Clone the source code:
+
+```bash
 git clone https://github.com/agilexrobotics/Piper_ros_moveit.git
 ```
 
-Navigate to the workspace
+Enter the workspace:
 
-```
+```bash
 cd Piper_ros_moveit
 ```
-Build
-```
+
+Compile:
+
+```bash
 colcon build
 ```
-## 4. Usage
-> Note: Remember to source the environment in a new terminal before running launch files.
 
-Navigate to the workspace
-```
-cd ~/Piper_ros_moveit
-```
-source
-```
-source install/setup.bash
-```
-### 4.1. Moveit RViz Simulation
+## 4. Moveit Control
 
-1) View the Piper robotic arm model
+### 4.1 Moveit Control for Gazebo Simulated Robot Arm
 
-```
-ros2 launch piper_description display_piper.launch.py 
-```
+> Note: Before using this, ensure that the processes started in Section 4.1 are closed. Running them simultaneously is not supported.
 
-After opening successfully, you need to add the model in Rviz. If the robotic arm is already displayed, no further addition is necessary.
+1) Start the Gazebo Simulation:
 
-In the lower-left corner of the display, add "RobotModel" and set the Description Topic to /robot_description.
-
-Settings on the left as shown below:
-
-![](src/image/piper.png)
-
-You can directly control the robotic arm joints through the pop-up control window.
-
-2) Use Moveit2 to control the robotic arm
-
-(You can use the previous step independently. After running, you can directly add the model. If the robotic arm is already displayed, no need to add it again.)
-
-```
-ros2 launch piper_moveit_config demo.launch.py
-```
-
-![](src/image/piper_moveit.png)
-
-You can directly drag the arrow on the end of the robotic arm to control it.
-
-After adjusting the position, click "Plan & Execute" or "Plan" under "MotionPlanning" on the left to begin planning.
-
-### 4.2. Start Gazebo Simulation
-> Note: You must close the processes opened in 4.1 before using this, as both cannot be opened simultaneously.
-
-1) Start Gazebo simulation
-
-```
+```bash
 ros2 launch piper_description piper_gazebo.launch.py
 ```
 
-Follow the same steps as in 4.1 to add the model. If the robotic arm is already displayed, no need to add it again.
+Follow Section 4.1 to add the model. If the simulated robot arm is already present in the display window, no additional action is required.
 
 ![](src/image/piper_gazebo.png)
 
-2) Use Moveit2 to control the robotic arm
+2) Use Moveit2 to Control the Robot Arm:
 
-> Note: Sometimes Moveit may not be able to control the Gazebo model. If this happens, you need to restart.
+> Note: If Moveit2 fails to control the Gazebo model, restart the simulation.
 
-
-```
+```bash
 ros2 launch piper_moveit_config demo.launch.py
 ```
 
-
 ![](src/image/piper_gazebo_moveit.png)
 
-After adjusting the position, click "Plan & Execute" under "MotionPlanning" to begin planning.
+Once the position is adjusted, click "Plan & Execute" under the MotionPlanning panel to start the motion planning.
 
-At this point, you can see the model in Gazebo starting to move.
+At this point, the robot model in Gazebo should begin moving.
 
-### 4.3. Moveit2 Control of Real Robotic Arm Piper
+### 4.3 Moveit Control for a Real Robot Arm
 
-1) Configure Piper_ros
+(1) Configure `piper_ros`
 
-Set up the environment
+Set up the environment:
 
-```
+```bash
 pip3 install python-can scipy piper_sdk catkin-pkg em
 sudo apt install ros-$ROS_DISTRO-ros2-control
 sudo apt install ros-$ROS_DISTRO-ros2-controllers
 sudo apt install ros-$ROS_DISTRO-controller-manager
 ```
 
-Source compilation
+Compile the source code:
 
-```
+```bash
 git clone https://github.com/agilexrobotics/Piper_ros.git -b ros-humble-no-aloha
 cd ~/Piper_ros
 colcon build 
 ```
-2) Control the robotic arm
 
-Install dependencies
-```
+(2) Control the Robot Arm
+
+Install dependencies:
+
+```bash
 sudo apt update && sudo apt install ethtool
 sudo apt install can-utils
 ```
-Activate the port
-```
+
+Activate the CAN port:
+
+```bash
 cd ~/Piper_ros
 source install/setup.bash
 bash can_activate.sh can0 1000000
 ```
-Start the control node
 
-```
+Start the control node:
+
+```bash
 ros2 launch piper start_single_piper.launch.py
 ```
 
-Start Moveit2
+Start Moveit2:
 
-```
+```bash
 cd ~/Piper_ros_moveit
-conda deactivate # 若无conda环境可去除此行
+conda deactivate # Remove this line if you are not using Conda
 source install/setup.bash
-ros2 launch piper_moveit_config demo.launch.py
 ```
 
+Run without a gripper:
+
+```bash
+ros2 launch piper_no_gripper_moveit demo.launch.py
+```
+
+Run with a gripper:
+
+```bash
+ros2 launch piper_with_gripper_moveit demo.launch.py
+```
 
 ![](src/image/piper_moveit.png)
 
-You can directly drag the arrow on the end of the robotic arm to control it.
+You can directly drag the end-effector arrows to control the robot arm.
 
-After adjusting the position, click "Plan & Execute" under "MotionPlanning" to begin planning and movement.
+After adjusting the position, click "Plan & Execute" under the MotionPlanning panel to start planning and executing the movement.
 
-## 5. Potential Issues
+## 5. Possible Issues
 
-### 5.1. Compilation Errors
+### 5.1 Error when launching Gazebo: URDF not loaded, causing end-effector to pass through the base
 
-    Install the missing packages according to the error messages. If using conda, pay attention to the environment path issues.
+(1) Check whether the `install` directory contains `piper_description/config`, and whether it includes the necessary files from `src/piper/piper_description/config`.
 
-### 5.2. Gazebo Launch Error: URDF Not Loaded, Arm End Effector and Base Model Intersect in Simulation
+The same applies if the `install` directory is missing `urdf`.
 
-1. Ensure that there is a config folder in `piper_description` in the install directory, and check if it contains the config files from `src/piper/piper_description/config`.
+(2) Check if the path in `src/piper/piper_description/urdf/piper_description_gazebo.xacro` (line 644) is correct. If the issue persists, try using an absolute path.
 
-2. Similarly, check if the URDF is missing in the install directory.
+### 5.3 Error when running `demo.launch.py`
 
-3. Ensure that the path in `src/piper/piper_description/urdf/piper_description_gazebo.xacro` at line 644 is correct. If the issue persists, try using the absolute path.
+**Error:** A parameter requires a `double`, but a `string` was provided.
 
-### 5.3. Error Running demo.launch.py
+**Solution:**
+Run the following command in the terminal:
 
-Error: A double parameter is required, but a string is provided.
-
-Solution:
-Run the following in the terminal
-
-```
+```bash
 echo "export LC_NUMERIC=en_US.UTF-8" >> ~/.bashrc
 source ~/.bashrc
 ```
 
-Or add `LC_NUMERIC=en_US.UTF-8` before running the launch file:
+Alternatively, set `LC_NUMERIC` before running the launch file:
 
-```
+```bash
 LC_NUMERIC=en_US.UTF-8 ros2 launch piper_moveit_config demo.launch.py
 ```
