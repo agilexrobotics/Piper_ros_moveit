@@ -117,16 +117,14 @@ roslaunch piper_with_gripper_moveit demo.launch use_rviz:=false
 >- **Piper Control Group** includes joints 1 and 6, joint 7 for gripper control.
 > The gripper control range is from 0 to 0.035 meters, corresponding to an actual gripper opening/closing distance of 0 to 0.07 meters.
 
-|joint_name|     limit     |
-|----------|  ---------    |
-|joint1    | [-2.618,2.618]|
-|joint2    | [0,3.14]|
-|joint3    | [-2.697,0]|
-|joint4    | [-1.832,1.832]|
-|joint5    | [-1.22,1.22]|
-|joint6    | [-2.0944,2.0944]|
-|joint7    | [0,0.035]|
-|joint8    | [-0.035,0]|
+|joint_name|     limit(rad)     |    limit(angle)    |     limit(rad/s)   |   limit(rad/s^2)   |
+|----------|     ----------     |     ----------     |     ----------     |     ----------     |
+|joint1    |   [-2.618, 2.618]  |    [-150.0, 150.0] |      [0, 3.0]      |      [0, 5.0]      |
+|joint2    |   [0, 3.14]        |    [0, 180.0]      |      [0, 3.0]      |      [0, 5.0]      |
+|joint3    |   [-2.967, 0]      |    [-170, 0]       |      [0, 3.0]      |      [0, 5.0]      |
+|joint4    |   [-1.745, 1.745]  |    [-100.0, 100.0] |      [0, 3.0]      |      [0, 5.0]      |
+|joint5    |   [-1.22, 1.22]    |    [-70.0, 70.0]   |      [0, 3.0]      |      [0, 5.0]      |
+|joint6    |   [-2.0944, 2.0944]|    [-120.0, 120.0] |      [0, 3.0]      |      [0, 5.0]      |
 
 Control information node is `/joint_states`:
 
