@@ -248,3 +248,25 @@ if __name__ == "__main__":
     except rospy.ROSInterruptException:
         pass
 ```
+
+## 5 MoveIt Control for Simulated Robotic Arm
+
+### 5.1 Gazebo
+
+#### 5.1.1 Gazebo Configuration
+
+See [piper_sim](<https://github.com/agilexrobotics/piper_sim>) README section 2.1.
+
+#### 5.1.2 MoveIt Control  
+
+Same as [4.2 Run MoveIt](#42-run-moveit).
+
+### 5.2 Mujoco  
+
+#### 5.2.1 Running Mujoco
+
+See [piper_sim](<https://github.com/agilexrobotics/piper_sim>) README section 2.2.  
+
+#### 5.2.2 MoveIt Control
+
+Same as [4.2 Run MoveIt](#42-run-moveit)

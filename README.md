@@ -250,3 +250,25 @@ if __name__ == "__main__":
     except rospy.ROSInterruptException:
         pass
 ```
+
+## 5 moveit控制仿真机械臂
+
+### 5.1 gazebo
+
+#### 5.1.1 运行gazebo
+
+见 [piper_sim](<https://github.com/agilexrobotics/piper_sim>)的 README 2.1
+
+#### 5.1.2 moveit控制
+
+同 [4.2 运行moveit](#42-运行moveit)
+
+### 5.2 mujoco
+
+#### 5.2.1 运行mujoco
+
+见 [piper_sim](<https://github.com/agilexrobotics/piper_sim>)的 README 2.2
+
+#### 5.2.2 moveit控制
+
+同 [4.2 运行moveit](#42-运行moveit)
