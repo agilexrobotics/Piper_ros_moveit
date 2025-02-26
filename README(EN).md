@@ -48,7 +48,7 @@ catkin_make
 
 ## 3 Workspace Compilation
 
-> Compilation may conflict due to the conda environment and system environment. You can uninstall conda or use the system environment for compilation. For more details, refer to https://blog.csdn.net/endurance2017/article/details/102997980.
+> Compilation may conflict due to the conda environment and system environment. You can uninstall conda or use the system environment for compilation. For more details, refer to [solution](https://blog.csdn.net/endurance2017/article/details/102997980).
 
 Clone the source from git, open the terminal:
 
@@ -111,6 +111,7 @@ roslaunch piper_with_gripper_moveit demo.launch use_rviz:=false
 ```
 
 > The gripper mode is divided into two control groups:
+>
 >- **Arm Control Group** includes joints 1 to 6.
 >- **Gripper Control Group** includes joints 7 and 8, with joint 7 for active control and joint 8 for passive control.
 >- **Piper Control Group** includes joints 1 and 6, joint 7 for gripper control.
@@ -153,7 +154,7 @@ roslaunch piper_no_gripper_moveit demo.launch use_rviz:=false
 
 ### 4.3.1 Teach Mode via Dragging
 
-![](src/image/piper_moveit.png)
+![piper_moveit](src/image/piper_moveit.png)
 
 After adjusting the position, click "Plan & Execute" under "MotionPlanning" on the left side to start planning and moving.
 

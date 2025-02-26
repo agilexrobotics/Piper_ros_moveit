@@ -48,7 +48,7 @@ catkin_make
 
 ## 3 工作空间编译
 
->此处编译可能因为conda环境和系统环境冲突,可以卸载conda解决或者使用系统环境编译, 问题详情可见 https://blog.csdn.net/endurance2017/article/details/102997980
+>此处编译可能因为conda环境和系统环境冲突,可以卸载conda解决或者使用系统环境编译, 问题详情可见[解决方法](https://blog.csdn.net/endurance2017/article/details/102997980)
 
 git源码,打开终端
 
@@ -111,6 +111,7 @@ roslaunch piper_with_gripper_moveit demo.launch use_rviz:=false
 ```
 
 >夹爪模式分为两个控制组:
+>
 >- **机械臂控制组** 包含关节 joint1 至 joint6
 >- **夹爪控制组** 包含关节 joint7 和 joint8, 夹爪控制组采用 joint7 进行主动控制,而 joint8 为被动控制
 >- **piper控制组** 包含关节 joint1 和 joint6, joint7为夹爪控制
@@ -153,7 +154,7 @@ roslaunch piper_no_gripper_moveit demo.launch use_rviz:=false
 
 ### 4.3.1 拖动示教
 
-![](src/image/piper_moveit.png)
+![piper_moveit](src/image/piper_moveit.png)
 
 调整好位置后点击左侧MotionPlanning中Planning的Plan&Execute即可开始规划并运动
 
