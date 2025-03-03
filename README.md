@@ -57,37 +57,7 @@ colcon build
 
 ## 4、moveit控制
 
-### 4.1、moveit控制Gazebo仿真机械臂
-
-> 注：需要关闭4.1中打开的进程后使用，不能同时开启
-
-1）启动Gazebo仿真
-
-```bash
-ros2 launch piper_description piper_gazebo.launch.py
-```
-
-按照4.1操作添加模型，若显示窗口已有机械臂则无需再添加
-
-![](src/image/piper_gazebo.png)
-
-2）使用moveit2，控制机械臂
-
-> 注：有时候会出现moveit控制不了gazebo模型的情况，需要重新启动
-
-```bash
-ros2 launch piper_moveit_config demo.launch.py
-```
-
-![](src/image/piper_gazebo_moveit.png)
-
-调整好位置后点击左侧MotionPlanning中Planning的Plan&Execute即可开始规划
-
-这时可以看到gazebo中的模型已经开始移动
-
-### 4.3、moveit控制真实机械臂
-
-1）配置piper_ros
+### 4.1、配置piper_ros
 
 配置环境
 
@@ -105,8 +75,6 @@ git clone https://github.com/agilexrobotics/Piper_ros.git -b ros-humble-no-aloha
 cd ~/Piper_ros
 colcon build 
 ```
-
-2）控制机械臂
 
 安装依赖
 
@@ -129,6 +97,8 @@ bash can_activate.sh can0 1000000
 ros2 launch piper start_single_piper.launch.py
 ```
 
+### 4.2、moveit2控制
+
 开启moveit2
 
 ```bash
@@ -149,15 +119,37 @@ ros2 launch piper_no_gripper_moveit demo.launch.py
 ros2 launch piper_with_gripper_moveit demo.launch.py
 ```
 
-![](src/image/piper_moveit.png)
+![piper_moveit](src/image/piper_moveit.png)
 
 可以直接拖动机械臂末端的箭头控制机械臂
 
 调整好位置后点击左侧MotionPlanning中Planning的Plan&Execute即可开始规划并运动
 
-## 5、可能遇见的问题
+## 5、moveit控制仿真机械臂
 
-### 5.1、打开gazebo时报错，提示urdf未加载，导致仿真环境中机械臂末端与底座穿模
+### 5.1、gazebo
+
+#### 5.1.1、运行gazebo
+
+见 [piper_sim](<https://github.com/agilexrobotics/piper_sim/tree/humble>)的 README 2.1
+
+#### 5.1.2 moveit控制
+
+同 [4.2 moveit2控制](#42moveit2控制)
+
+### 5.2、mujoco
+
+#### 5.2.1、moveit控制（先运行moveit）
+
+同 [4.2 moveit2控制](#42moveit2控制)
+
+#### 5.2.2、运行mujoco
+
+见 [piper_sim](<https://github.com/agilexrobotics/piper_sim/tree/humble>)的 README 2.2
+
+## 6、可能遇见的问题
+
+### 6.1、打开gazebo时报错，提示urdf未加载，导致仿真环境中机械臂末端与底座穿模
 
 1、注意编译后的install下piper_description中是否有config，且config中是否包含src/piper/piper_description中config的文件
 
@@ -165,7 +157,7 @@ install中缺少urdf同理
 
 2、注意src/piper/piper_description/urdf/piper_description_gazebo.xacro中644行的路径是否正确，如确认后问题依然存在，将路径改为绝对路径
 
-### 5.3、运行demo.launch.py时报错
+### 6.2、运行demo.launch.py时报错
 
 报错：参数需要一个double，而提供的是一个string
 解决办法：
